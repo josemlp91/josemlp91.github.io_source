@@ -1,0 +1,50 @@
+# Build settings
+permalink: /blog/:year/:title/
+markdown: kramdown
+highlighter: pygments
+plugins: [jekyll-paginate-v2]
+
+pagination:
+  enabled: true
+  per_page: 3
+  permalink: "/page/:num/"
+
+comments: false
+
+source: source
+destination: _site
+sass:
+  sass_dir: _sass
+  style: compressed # expanded
+
+# SEO settings
+title: José Miguel López
+description: "Personal page of a humble programmer"
+keywords: "software, backend, python, web, SEO, blog, developer"
+url: http://josemiguelopez.es/
+baseurl: ""
+
+google_analytics: UA-129308889-1
+repo: https://github.com/josemlp91/josemlp91.github.io
+disqus_shortname: "nandothemes"
+disqus_site_shortname: "nandothemes"
+
+# Author settings
+author:
+  name: José Miguel López
+  job: Web Software Developer
+  bio: "Web developer, infinite curiosity moves me to learn more every day and be alert to innovations.
+   In ♥ with Python. Working on different stuff."
+  thumb: /images/josemi.jpg
+  email: josmilope@gmail.com
+  url: http://http://josemiguelopez.es/
+  github: https://github.com/josemlp91
+  twitter: https://twitter.com/josemlp91
+  linkedin: http://es.linkedin.com/in/josmilope
+
+# navbar pages
+navbar:
+  - slug: about
+    title: About
+
+exclude: ["config.rb", "src", "Gemfile", "Gemfile.lock", "package.json","README.md", "Rakefile"]
