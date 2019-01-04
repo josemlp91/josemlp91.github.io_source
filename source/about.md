@@ -1,11 +1,18 @@
 ---
 layout: page
-title: About
+title: About me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Hello everybody, my name is Jose Miguel, welcome to my litle spot in the web.
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+Computer engineering degree by Granada University, enthusiast about **web tecnologies**, **internet of things** and **security**. I am moved by continuous learning and infinite curiosity.  
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+My favorite lenguage is **Python** and in my free time help to organize [Python Granada](https://python-granada.es/).
+
+Aside to computer science, I love the **nature**, the **TV series** and the **mechanics**.
+
+
+
+
+
