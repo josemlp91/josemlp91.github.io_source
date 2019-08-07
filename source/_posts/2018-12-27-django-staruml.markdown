@@ -10,7 +10,6 @@ image: /images/staruml.png
 summary: StarUML extension to auto auto-generate Django Models, some prominent feature are auto-generate model class, attributes, inheritance, relationship and aditional params.
 ---
 
-# StarUML extension to auto generate Django Models
 
 ## Features
 
