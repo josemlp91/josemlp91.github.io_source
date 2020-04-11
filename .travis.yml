@@ -16,11 +16,8 @@ env:
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
 before_script:
-  - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
-  - chmod +x ./kubectl
-  - sudo mv ./kubectl /usr/local/bin/kubectl
   - mkdir ${HOME}/.kube
-  - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
+  - echo "$KUBE_CONFIG" | base64 --decode > kubeconfig
   - docker pull smesch/kubectl
 
 script:
@@ -29,7 +26,7 @@ script:
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
   - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
-  - kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
+  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
 
 notifications:
   email:
