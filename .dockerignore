@@ -1,0 +1,5 @@
+
+.git/
+kubectl/
+
+docker-compose*.yml
