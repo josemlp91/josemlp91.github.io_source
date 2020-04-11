@@ -7,4 +7,5 @@ COPY entrypoint.sh /entrypoint
 RUN sed -i 's/\r//' /entrypoint
 RUN chmod +x /entrypoint
 
+
 ENTRYPOINT ["/entrypoint"]

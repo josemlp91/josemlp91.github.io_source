@@ -16,7 +16,6 @@ before_install:
  - source $HOME/google-cloud-sdk/path.bash.inc
  - gcloud components install kubectl
 
-
 script:
   - touch kubeconfig
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
