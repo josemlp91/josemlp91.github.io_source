@@ -28,4 +28,11 @@ script:
   - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
-  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_COMMIT
+  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
+
+notifications:
+  email:
+    recipients:
+      - josmilope@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
