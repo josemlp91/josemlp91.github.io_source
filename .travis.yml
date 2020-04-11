@@ -17,9 +17,9 @@ env:
 
 before_script:
   - docker pull smesch/kubectl
-  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 script:
+  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
   - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
   - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
