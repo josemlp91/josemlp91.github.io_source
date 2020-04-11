@@ -9,28 +9,30 @@ env:
   global:
     - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 before_install:
-  - touch kubectl
-  - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-  - curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && chmod +x skaffold && sudo mv skaffold /usr/local/bin/
+ - curl https://sdk.cloud.google.com | bash > /dev/null
+ - source $HOME/google-cloud-sdk/path.bash.inc
+ - gcloud components install kubectl
 
 install:
   - docker pull bitnami/kubectl
 
 script:
-  - touch kubeconfig
-  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
-  - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
-  - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
-  - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
-  - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
-  - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig
-  - docker run --rm -v ${TRAVIS_BUILD_DIR}:/kube bitnami/kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
+  - kubectl version
+  # - touch kubeconfig
+  # - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
+  # - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
+  # - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
+  # - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+  # - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+  # - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
+  # - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig
+  # - docker run --rm -v ${TRAVIS_BUILD_DIR}:/kube bitnami/kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
 
 notifications:
   email:
