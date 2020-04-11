@@ -20,6 +20,7 @@ install:
   - mkdir ${HOME}/.kube
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
 
+
 script:
   - touch kubeconfig
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
