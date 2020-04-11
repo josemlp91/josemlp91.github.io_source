@@ -34,4 +34,6 @@ up-pro: build-pro ## Run production web server.
 publish:  ## Publish image in Docker Hub.
 	docker login
 	docker build -f Dockerfile.prod -t josemlp91/myblog:$(gitver) .
-	docker push josemlp91/myblog
+	docker push josemlp91/myblog:$(gitver)
+	docker tag josemlp91/myblog:$(gitver) josemlp91/myblog:latest
+	docker push josemlp91/myblog:latest

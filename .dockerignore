@@ -4,3 +4,5 @@ kubectl/
 
 Makefile
 docker-compose*.yml
+.travis.yml
+README.md
