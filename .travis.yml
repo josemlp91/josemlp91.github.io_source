@@ -9,17 +9,10 @@ env:
   global:
     - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
-    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 before_install:
- - curl https://sdk.cloud.google.com | bash > /dev/null
- - source $HOME/google-cloud-sdk/path.bash.inc
- - gcloud components install kubectl
-
-install:
-  - mkdir ${HOME}/.kube
-  - export KUBECONFIG="$(echo ${KUBE_CONFIG} | base64 --decode)" 
-
+  - docker pull smesch/kubectl
+  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 script:
   - touch kubeconfig
@@ -32,9 +25,9 @@ script:
   - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
-  - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig
   - echo "Ready to deploy in K8S."
-  - kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
+  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
+
 
 notifications:
   email:
