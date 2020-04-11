@@ -15,14 +15,12 @@ env:
     - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
-install:
-  - curl -L https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl --output kubectl
+before_script:
+  - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
   - mkdir ${HOME}/.kube
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
-
-before_script:
   - docker pull smesch/kubectl
 
 script:
