@@ -20,6 +20,7 @@ install:
   - docker pull bitnami/kubectl
 
 script:
+  - touch kubeconfig
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
   - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
