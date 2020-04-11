@@ -15,6 +15,7 @@ env:
     - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
+
 install:
   - docker pull bitnami/kubectl
 
