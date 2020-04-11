@@ -2,5 +2,9 @@ FROM jekyll/builder
 
 RUN apk update && apk add --update nodejs nodejs-npm
 WORKDIR /app/jekyll
-COPY ./jekyll/Gemfile* /app/jekyll/
-RUN bundle install
+
+COPY entrypoint.sh /entrypoint
+RUN sed -i 's/\r//' /entrypoint
+RUN chmod +x /entrypoint
+
+ENTRYPOINT ["/entrypoint"]
