@@ -16,6 +16,7 @@ env:
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
 install:
+  - mkdir ${HOME}/.kube
   - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
   - docker pull bitnami/kubectl
 
