@@ -18,7 +18,7 @@ before_install:
 
 install:
   - mkdir ${HOME}/.kube
-  - echo ${KUBE_CONFIG} | base64 --decode > KUBECONFIG 
+  - export KUBECONFIG="$(echo ${KUBE_CONFIG} | base64 --decode)" 
 
 
 script:
