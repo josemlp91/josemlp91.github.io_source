@@ -1,4 +1,4 @@
-sudo: required
+sudo: enabled
 
 services:
   - docker
@@ -14,7 +14,6 @@ env:
   global:
     - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
-
 
 before_install:
   - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.7.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
