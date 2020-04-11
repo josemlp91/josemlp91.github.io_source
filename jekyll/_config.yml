@@ -18,7 +18,7 @@ sass:
   style: compressed # expanded
 
 # SEO settings
-title: José Miguel López
+title: José Miguel López (2)
 description: "Personal page of a humble programmer"
 keywords: "software, backend, python, web, SEO, blog, developer"
 url: http://josemiguelopez.es/
@@ -31,7 +31,7 @@ disqus_site_shortname: "nandothemes"
 
 # Author settings
 author:
-  name: José Miguel López
+  name: José Miguel López (demo)
   job: Web Software Developer
   bio: "Web developer, infinite curiosity moves me to learn more every day and be alert to innovations.
    In ♥ with Python. Working on different stuff."
