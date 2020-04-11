@@ -16,9 +16,8 @@ env:
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
 before_script:
-  - mkdir ${HOME}/.kube
-  - echo "$KUBE_CONFIG" | base64 --decode > kubeconfig
-  - docker pull smesch/kubectl
+  - echo "$KUBE_CONFIG" | base64 --decode > ${HOME}/.kube/config
+  - docker pull bitnami/kubectl
 
 script:
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
@@ -26,7 +25,7 @@ script:
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
   - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
-  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
+  - docker run --rm -v ${HOME}/.kube/config:/.kube/config bitnami/kubectl kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
 
 notifications:
   email:
