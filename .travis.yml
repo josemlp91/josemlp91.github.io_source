@@ -26,7 +26,7 @@ script:
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
   - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
-  - docker run --rm -v ${HOME}/.kube/config:/.kube/config bitnami/kubectl -- set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
+  - docker run --rm -v ${HOME}/.kube/config:/.kube/config bitnami/kubectl set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_BUILD_ID
 
 notifications:
   email:
