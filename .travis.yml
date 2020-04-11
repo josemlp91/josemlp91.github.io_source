@@ -11,9 +11,6 @@ env:
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
-variables:
-  KUBECONFIG: /etc/deploy/config
-
 before_install:
  - curl https://sdk.cloud.google.com | bash > /dev/null
  - source $HOME/google-cloud-sdk/path.bash.inc
@@ -21,7 +18,7 @@ before_install:
 
 install:
   - mkdir ${HOME}/.kube
-  - echo ${KUBE_CONFIG} | base64 --decode > ${KUBECONFIG} 
+  - echo ${KUBE_CONFIG} | base64 --decode > KUBECONFIG 
 
 
 script:
