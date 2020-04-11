@@ -12,14 +12,14 @@ branches:
 
 env:
   global:
-    - DOCKER_IMAGE_NAME="josemlp91/myblog"
+    - DOCKER_IMAGE_NAME="myblog"
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
 before_script:
   - docker pull smesch/kubectl
 
 script:
-  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
+  - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
   - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
   - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
