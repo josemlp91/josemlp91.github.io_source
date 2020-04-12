@@ -11,10 +11,8 @@ env:
     - K8S_DEPLOYMENT_NAME="josemlp91-myblog"
 
 before_install:
+  - docker pull smesch/kubectl
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
-  - curl https://sdk.cloud.google.com | bash > /dev/null
-  - source $HOME/google-cloud-sdk/path.bash.inc
-  - gcloud components install kubectl
 
 script:
   - touch kubeconfig
@@ -28,7 +26,8 @@ script:
   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
   - echo "Ready to deploy in K8S."
-  - kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_COMMIT
+  - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_COMMIT
+
 
 notifications:
   email:

@@ -166,5 +166,11 @@ lo primero que se me ocurre es tirar de Amazon, Google Cloud o Azure. Además al
 
 Comienzo a comparar diferentes proveedores de Servidores Cloud VPS, y consigo encontrar uno que me convence en relación calidad precio. Teniendo en cuenta que necesito tener dos, como mínimo (nodo máster y un worker), y que el master debe tener 2GB de RAM y 2 cores. 
 
-Con mis flamantes máquinas con Ubuntu 18, comienzo a instalar todo, dejo link de las guias seguidas.
+Con mis flamantes máquinas, comienzo a instalar todo, ne me extiendo en explicar el proceso, dado que es largo.
+Dejo las fuentes que he seguido.
+
+Y este seria el resultado.
+
+![](/images/nodes.png)
+
 
