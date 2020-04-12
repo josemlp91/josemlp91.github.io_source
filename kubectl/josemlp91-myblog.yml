@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
       - name: josemlp91-myblog
-        image: josemlp91/myblog:1.0
+        image: josemlp91/myblog:latest
         ports:
         - containerPort: 80

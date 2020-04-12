@@ -37,6 +37,11 @@ up: build-dev ## Run developer web server.
 up-pro: build-pro ## Run production web server.
 	docker-compose -f docker-compose-prod.yml up
 
+create-post: ## Create new post, usage exmple: make create-post name=TITLE)
+	docker-compose run web rake post title=$(name)
+	sudo chown -R $(runner):$(runner) -Rf *
+
+
 publish:  ## Publish image in Docker Hub.
 	docker login
 	docker build -f Dockerfile.prod -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) .
