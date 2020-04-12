@@ -1,14 +1,11 @@
 ---
 layout: post
 title: "Matando moscas a 'Kañonazos'"
-permalink: matando-moscas-kannonazos
 date: 2020-04-12 06:39:50
 comments: true
 description: "Matando moscas a cañonazos, usando herramientas avanzadas del Mundo Devops, como Docker,TravisCI y Kubernetes."
 keywords: "devops, developer, software"
 comments: false
-categories:
-tags:
 image: /images/rudder.jpg
 summary: Quizá al leer este articulo, no noten gran diferencia en la web, sigue siendo tan simple, y corta de contenidos como siempre, (no nos engañemos). Pero creedme que esto ha cambiado, y mucho. Si queréis conocer las cosas que han cambiado, os invito a leer el post completo. 
 
