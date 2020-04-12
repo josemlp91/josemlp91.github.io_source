@@ -175,7 +175,8 @@ con Nginx, aunque existe muchas otras opciones, entre ellas Traefik y HAProxy.
 En este punto también conozco la herramienta **Helm**, con la cual implementar el ingress es un poco más simple.
 
 {% highlight sh %}
-helm install stable/nginx-ingress --name my-nginx --set controller.publishService.enabled=true
+helm install stable/nginx-ingress --name my-nginx  \ 
+--set controller.publishService.enabled=true
 {% endhighlight %}
 
 {% highlight yaml %}
@@ -234,13 +235,15 @@ gitver=$(shell git log -1 --pretty=format:"%H")
 
 publish:  ## Publish image in Docker Hub.
 	docker login
-	docker build -f Dockerfile.prod -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) .
+	docker build -f Dockerfile.prod -t \ 
+	 $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) .
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
 	docker tag $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) \
 	 $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
 	kubectl set image deployment/$(K8S_DEPLOYMENT_NAME) \ 
-	 $(K8S_DEPLOYMENT_NAME)=$(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
+	 $(K8S_DEPLOYMENT_NAME)= \
+	 $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
 
 {% endhighlight %}
 
@@ -275,9 +278,11 @@ before_install:
 script:
   - touch kubeconfig
   - docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" docker.io
-  - docker build -f Dockerfile.prod -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
+  - docker build -f Dockerfile.prod -t  \ 
+    ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} .
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT}
-  - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
+  - docker tag ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TRAVIS_COMMIT} \
+    ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
   - docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:latest
   - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
@@ -285,8 +290,10 @@ script:
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
   - echo "Ready to deploy in K8S."
   - docker run -v ${TRAVIS_BUILD_DIR}:/kube smesch/kubectl kubectl \
-    --kubeconfig /kube/kubeconfig set image deployment/${K8S_DEPLOYMENT_NAME} \ 
-    ${K8S_DEPLOYMENT_NAME}=${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_COMMIT
+    --kubeconfig /kube/kubeconfig set image \
+    deployment/${K8S_DEPLOYMENT_NAME} \ 
+    ${K8S_DEPLOYMENT_NAME}= \
+    ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:$TRAVIS_COMMIT
 
 {% endhighlight %}
 
@@ -307,3 +314,10 @@ Espero poder seguir montando servicios más interesantes e ir escribiendo un poc
 - [Cómo configurar un Ingress de Nginx con Cert-Manager en Kubernetes de DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes-es)
 - [How To Set Up an Nginx Ingress on DigitalOcean Kubernetes Using Helm](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm)
 - [Continuous Deployment with Travis CI and Kubernetes](https://kumorilabs.com/blog/k8s-8-continuous-deployment-travis-ci-kubernetes/)
+
+## WARNING ⚠️
+
+- Los el código fuente puede presentar problemas de formateado, (dado que he tratado de adaptarlo a pantallas de móvil),
+puedes consultar la versión original en el código fuente.
+
+- Es un ejemplo didactico, usalo bajo tu responsabilidad.
