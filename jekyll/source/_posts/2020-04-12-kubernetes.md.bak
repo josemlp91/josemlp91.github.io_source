@@ -296,9 +296,9 @@ script:
 
 ## Conclusiones
 
-Cuando decía antes que "mataba moscas a cañonazos", quería referirme a que no es necesario hacer tal despliegue de tecnologías y componentes, para poner en producción una **web estática**. Además creo que en ciertas situaciones puede ser peligroso puesto que  a la par que automatizando el proceso, incrementamos la complejidad del sistema y la respuesta ante un posible  error sea menos ágil, obligándonos a mirar y rebuscar logs en varios elementos. Siempre hay que pensar en la mejor herramienta a nuestro problema.
+Cuando decia antes que "mataba moscas a cañonazos", queria referirme a que no es necesario hacer tal despliegue de tecnologías y componentes, para poner en producción una web estática. Además creo que en ciertas cituaciones puede ser peligroso puesto que  a la par que automatizando el proceso, incrementamos la complejidad del sistema y la respuesta ante un posible  error sea menos agil, obligandonos a mirar y rebuscar logs en vários elementos. Siempre hay que pensar en la mejor herramienta a nuestro problema.
 
-Las tecnologías **Devops** y en particular **Docker y Kubernetes** me parece un mundo asombroso, y es por ello que me he tomado este tiempo en hacer este ejercicio y poder contarlo.
+Las tecnologias Devops y en particular Docker y Kubernetes me parece un mundo asombroso, y es por ello que me he tomado este tiempo en hacer este ejercicio y poder contarlo.
 
 Espero poder seguir montando servicios más interesantes e ir escribiendo un poco más a menudo. 
 
@@ -311,3 +311,5 @@ Espero poder seguir montando servicios más interesantes e ir escribiendo un poc
 - [Cómo configurar un Ingress de Nginx con Cert-Manager en Kubernetes de DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-with-cert-manager-on-digitalocean-kubernetes-es)
 - [How To Set Up an Nginx Ingress on DigitalOcean Kubernetes Using Helm](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-on-digitalocean-kubernetes-using-helm)
 - [Continuous Deployment with Travis CI and Kubernetes](https://kumorilabs.com/blog/k8s-8-continuous-deployment-travis-ci-kubernetes/)
+
+- 
