@@ -18,9 +18,11 @@ Otra frase que me viene a la cabeza, al escribir este post, es "los experimentos
 
 Como habéis podido comprobar, no me caracterizo por escribir continuamente, y la diferencia entre las fechas de publicaciones, distan meses.
 
-Así que después de tanto tiempo sin escribir nada, este fin de semana, me senté en el ordenador decidido a escribir algo, (sin saber muy bien que cosa...), aprovechando que hay que quedarse en casa dada la situación que alerta que estamos sufriendo, por el COVID-19. 
+Así que después de tanto tiempo sin escribir nada, este fin de semana, me senté en el ordenador decidido a escribir algo, (sin saber muy bien que cosa...), aprovechando que hay que quedarse en casa dada la situación de alerta que estamos sufriendo, por el COVID-19. 
 
-Al descargarme el [repositorio](https://github.com/josemlp91/josemlp91.github.io_source) con el código fuente del blog, mi fuerza de voluntad empezó a flojear, al recordad que uso **"Jekyll"** y eso significa que voy a tener que instalar un montón de cosas relacionadas con el ecosistema de **Ruby**. Siendo un lenguaje de programación que no suelo utilizar, me da gran pereza emborronar mi recién formateado ordenador, con multitud de dependencias y paquetes, que poco voy a aprovechar. 
+Al descargarme el [repositorio](https://github.com/josemlp91/josemlp91.github.io_source) con el código fuente del blog, mi fuerza de voluntad empezó a flojear, al recordad que uso **"Jekyll"** y eso significa que voy a tener que instalar un montón de cosas relacionadas con el ecosistema de **Ruby**. 
+
+Siendo un lenguaje de programación que no suelo utilizar, me da gran pereza emborronar mi recién formateado ordenador, con multitud de dependencias y paquetes, que poco voy a aprovechar. 
 
 Después de sopesarlo un momento, pienso que lo mejor es **Dockerizar** el proyecto, y no volver a instalar dependencias de Jekyll. 
 
@@ -40,7 +42,6 @@ COPY entrypoint.sh /entrypoint
 RUN sed -i 's/\r//' /entrypoint
 RUN chmod +x /entrypoint
 
-
 ENTRYPOINT ["/entrypoint"]
 {% endhighlight %}
 
@@ -54,7 +55,6 @@ set -o errexit
 set -o nounset
 
 bundle install
-
 exec "$@"
 {% endhighlight %}
 
@@ -84,7 +84,7 @@ Pero ya puestos no me puedo quedar aquí, y pienso en crear una imágen que en u
 
 Después de pensar un poco, creo que la opción más limpia es usar **"multi-stage"**.
 Y como podemos ver a continuación, el primer stage, se ocupa de hacer la compilación, 
-y el segundo stage, es un servidor nginx alpine, con ello consigo que la imágen Docker pese menos de 14 MB.
+y el segundo stage, es un servidor nginx alpine, con ello consigo que la imágen Docker pese menos de **14 MB**.
 
 {% highlight sh %}
 FROM jekyll/builder as builder
@@ -158,7 +158,7 @@ En este punto ya no me puedo quedar aquí después de darle algunas vueltas,
 decido empezar a buscar un cluster **K8S** en la nueve, donde hacer mi experimento, 
 lo primero que se me ocurre es tirar de Amazon, Google Cloud o Azure. ☁️ Además alguno de ellos ofrece crédito de forma gratuita para hacer pruebas. Pero creo que hay que darle un puntito más de emoción de la cosa, y tratar de instalar un cluster kubernetes, puede ser un buen reto. 💪 (estoy confinado en casa y tengo tengo todo el puente...).
 
-Comienzo a comparar diferentes proveedores de Servidores Cloud VPS, y consigo encontrar uno que me convence en relación calidad precio. Teniendo en cuenta que necesito tener dos, como mínimo (nodo máster y un worker), y que el master debe tener 2GB de RAM y 2 cores. 
+Comienzo a comparar diferentes proveedores de **Servidores Cloud VPS**, y consigo encontrar uno que me convence en relación calidad precio. Teniendo en cuenta que necesito tener dos, como mínimo (nodo máster y un worker), y que el master debe tener **2GB de RAM y 2 cores**. 
 
 Con mis flamantes máquinas, comienzo a instalar todo, no me extiendo en explicar el proceso, dado que es largo.
 Dejo las fuentes que he seguido, al final del post. ⬇️
@@ -167,13 +167,12 @@ Y este seria el resultado.
 
 ![](/images/nodes.png)
 
-
 Y ya puedo repetir lo mismo que hacia en minikube, pero esta vez con un cluste de producción.
 
 Para que sea completamente operativo, es esencial crear un ingress, en mi caso me decanto por la implementación
-con Nginx, aunque existe muchas otras opciones, ya sea con Traefik o Haproxy. 
+con Nginx, aunque existe muchas otras opciones, entre ellas Traefik y HAProxy. 
 
-En este punto también conozco la herramienta Helm, con la cual implementar el ingress es tan simple como:
+En este punto también conozco la herramienta **Helm**, con la cual implementar el ingress es un poco más simple.
 
 {% highlight sh %}
 helm install stable/nginx-ingress --name my-nginx --set controller.publishService.enabled=true
@@ -212,7 +211,7 @@ spec:
 kubectl create -f first-ingress.yaml
 {% endhighlight %}
 
-Con esto solo me queda modificar la entrada de mi dominio, para hacerla apuntar a la Ip pública del nodo máster de mi cluster.
+Con esto solo me queda modificar la entrada de mi **dominio**, para hacerla apuntar a la Ip pública del nodo máster de mi cluster.
 
 ![](/images/pods.png)
 
