@@ -2,8 +2,14 @@
 
 .DEFAULT_GOAL := help
 
+
+DOCKER_USERNAME = josemlp91
+DOCKER_IMAGE_NAME = myblog
+K8S_DEPLOYMENT_NAME = josemlp91-myblog
+
 runner=$(shell whoami)
 gitver=$(shell git log -1 --pretty=format:"%H")
+
 
 
 help: ## This help.
@@ -33,7 +39,8 @@ up-pro: build-pro ## Run production web server.
 
 publish:  ## Publish image in Docker Hub.
 	docker login
-	docker build -f Dockerfile.prod -t josemlp91/myblog:$(gitver) .
-	docker push josemlp91/myblog:$(gitver)
-	docker tag josemlp91/myblog:$(gitver) josemlp91/myblog:latest
-	docker push josemlp91/myblog:latest
+	docker build -f Dockerfile.prod -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) .
+	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
+	docker tag $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
+	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
+	kubectl set image deployment/$(K8S_DEPLOYMENT_NAME) $(K8S_DEPLOYMENT_NAME)=$(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
