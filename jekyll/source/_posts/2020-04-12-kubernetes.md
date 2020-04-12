@@ -27,7 +27,7 @@ Al descargarme el [repositorio](https://github.com/josemlp91/josemlp91.github.io
 
 Después de sopesarlo un momento, pienso que lo mejor es **Dockerizar** el proyecto, y no volver a instalar dependencias de Jekyll. 
 
-## Dockerizando 🐋
+## Docker 🐋
 
 Lo primero que me interesa es poder desarrollar en local, aislando las dependencias, y que sea *auto-instalable*.
 Antes de nada paso a reestructurar los directorios y de paso limpiar ficheros que no se usan. 
@@ -294,7 +294,7 @@ script:
 
 {% endhighlight %}
 
-## Conclusiones
+## Conclusiones 🔮
 
 Cuando decía antes que "mataba moscas a cañonazos", quería referirme a que no es necesario hacer tal despliegue de tecnologías y componentes, para poner en producción una **web estática**. Además creo que en ciertas situaciones puede ser peligroso puesto que  a la par que automatizando el proceso, incrementamos la complejidad del sistema y la respuesta ante un posible  error sea menos ágil, obligándonos a mirar y rebuscar logs en varios elementos. Siempre hay que pensar en la mejor herramienta a nuestro problema.
 
@@ -303,7 +303,7 @@ Las tecnologías **Devops** y en particular **Docker y Kubernetes** me parece un
 Espero poder seguir montando servicios más interesantes e ir escribiendo un poco más a menudo. 
 
 
-## Referencias
+## Referencias 📖
 
 - [Jekyll is a simple, blog-aware, static site generato](https://jekyllrb.com/)
 - [The package manager for Kubernetes](https://helm.sh/)
