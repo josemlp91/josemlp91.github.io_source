@@ -317,7 +317,7 @@ Espero poder seguir montando servicios más interesantes e ir escribiendo un poc
 
 ## WARNING ⚠️
 
-- Los el código fuente puede presentar problemas de formateado, (dado que he tratado de adaptarlo a pantallas de móvil),
+> Los el código fuente puede presentar problemas de formateado, (dado que he tratado de adaptarlo a pantallas de móvil),
 puedes consultar la versión original en el código fuente.
 
-- Es un ejemplo didactico, usalo bajo tu responsabilidad.
+> Es un ejemplo didactico, usalo bajo tu responsabilidad.
