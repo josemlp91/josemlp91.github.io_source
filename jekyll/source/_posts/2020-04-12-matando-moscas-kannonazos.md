@@ -14,15 +14,15 @@ summary: Quizá al leer este articulo, no noten gran diferencia en la web, sigue
 ![](/images/rudder-mini.jpg)
 
 Una de las primeras cosas que me enseñaron en el mundo de la informática es que debemos evitar "matar moscas a cañonazos". 
-Otra frase que me viene a la cabeza, al escribir este post es "los experimentos con gaseosa".
+Otra frase que me viene a la cabeza al escribir este post es "los experimentos con gaseosa".
 
-Como habéis podido comprobar no me caracterizo por escribir continuamente y la diferencia entre las fechas de publicaciones, distan meses.
+Como habéis podido comprobar no me caracterizo por escribir continuamente y la diferencia entre las fechas de publicaciones es muy amplia.
 
-Así que después de tanto tiempo sin escribir nada, este fin de semana, me senté en el ordenador decidido a escribir algo (sin saber muy bien que contar) aprovechando que hay que quedarse en casa dada la situación de alerta que estamos sufriendo, por la COVID-19. 
+Así que después de tanto tiempo sin escribir nada, este fin de semana, me senté en el ordenador decidido a escribir algo (sin saber muy bien que contar) aprovechando que hay que quedarse en casa dada la situación de alerta que estamos sufriendo por la COVID-19. 
 
 Al descargarme el [repositorio](https://github.com/josemlp91/josemlp91.github.io_source) con el código fuente del blog, mi fuerza de voluntad empezó a flojear al recordad que uso **"Jekyll"** y eso significa que voy a tener que instalar un montón de cosas relacionadas con el ecosistema de **Ruby**. 
 
-Siendo un lenguaje de programación que no suelo utilizar, me da gran pereza emborronar mi recién formateado ordenador, con multitud de dependencias y paquetes, que poco voy a aprovechar. 
+Siendo un lenguaje de programación que no suelo utilizar, me da gran pereza emborronar mi recién formateado ordenador con multitud de dependencias y paquetes, que poco voy a aprovechar. 
 
 Después de sopesarlo un momento, pienso que lo mejor es **Dockerizar** el proyecto y no volver a instalar dependencias de Jekyll. 
 
@@ -58,7 +58,7 @@ bundle install
 exec "$@"
 {% endhighlight %}
 
-Mi memoria es bastante limitada, por ello me escribo un **docker-compose** para desarrollo, 
+Mi memoria es bastante limitada, por ello escribo un **docker-compose** para desarrollo, 
 así ya no tengo que estar recordando las diferentes opciones, volúmenes y puertos que debo añadir al arrancar el contenedor.
 La orden a invocar es ``jekyll serve`` (para el servidor de pruebas) y el puerto 4000.
 
@@ -157,11 +157,11 @@ kubectl create -f josemlp91-myblog.yml
 Y veo que funciona. Subidon de adrenalina. 🎈 🎊 🎉
 
 En este punto ya no me puedo quedar aquí, después de darle algunas vueltas,
-decido empezar a buscar un cluster **K8S** en la nube, donde hacer mi experimento. 
+decido empezar a buscar un clúster **K8S** en la nube donde hacer mi experimento. 
 
 Lo primero que se me ocurre es tirar de Amazon, Google Cloud o Azure ☁️ 
 (además alguno de ellos ofrece crédito de forma gratuita para hacer pruebas). 
-Pero creo que hay que darle un puntito de emoción a la cosa y tratar de instalar un cluster kubernetes.
+Pero creo que hay que darle un puntito de emoción a la cosa y tratar de instalar un clúster kubernetes.
 Puede ser un buen reto 💪 (estoy confinado en casa y tengo todo el puente...).
 
 Comienzo a comparar diferentes proveedores de **Servidores Cloud VPS** 
@@ -174,7 +174,7 @@ Y este seria el resultado.
 
 ![](/images/nodes.png)
 
-Y ya puedo repetir lo mismo que hacia en minikube pero esta vez con un cluster de producción.
+Y ya puedo repetir lo mismo que hacía en minikube pero esta vez con un clúster de producción.
 
 Para que sea completamente operativo, es esencial crear un ingress, en mi caso me decanto por la implementación
 con Nginx aunque existen muchas otras opciones, entre ellas Traefik y HAProxy. 
@@ -256,13 +256,13 @@ publish:  ## Publish image in Docker Hub.
 
 ## Integración continua ⚙️ ⛓
 
-En este punto, lo interesante sería que todo esto se haga de forma automática al hacer un commit en github (rama master)
-para ello, recurro a TravisCI que ya esta integrado directamente con GitHub y es gratuito con proyectos de código abierto.
+En este punto, lo interesante sería que todo esto se haga de forma automática al hacer un commit en github (rama master).
+Para ello, recurro a TravisCI que ya esta integrado directamente con GitHub y es gratuito con proyectos de código abierto.
 
-Así queda el archivo ``.travis.yml`` donde lo importante es definir la configuración para conectarte a K8S mediante variables de entorno secretas.
+Así queda el archivo ``.travis.yml`` dónde lo importante es definir la configuración para conectarte a K8S mediante variables de entorno secretas.
 
 Otro punto a tener en cuenta, ha sido la instalación de "kubectl" en la máquina de Travis. Después de probar varias alternativas,
-he podido comprobar que lo más rápido es usar una imágen de docker auxiliar que ya tiene la utilidad "kubectl" instalada. 
+he podido comprobar que lo más rápido es usar una imagen de docker auxiliar que ya tiene la utilidad "kubectl" instalada. 
 
 {% highlight yaml %}
 
@@ -306,7 +306,7 @@ script:
 
 ## Conclusiones 🔮
 
-Cuando decía antes que "mataba moscas a cañonazos" quería referirme a que no es necesario hacer tal despliegue de tecnologías y componentes para poner en producción una **web estática**. Además creo que en ciertas situaciones puede ser peligroso puesto que a la par que automatizo el proceso, incremento la complejidad del sistema y la respuesta ante un posible error sea menos ágil, obligándonos a mirar y rebuscar logs en varios elementos. 
+Cuando decía antes que "mataba moscas a cañonazos" quería referirme a que no es necesario hacer tal despliegue de tecnologías y componentes para poner en producción una **web estática**. Además creo que en ciertas situaciones puede ser peligroso puesto que a la par que automatizo el proceso incremento la complejidad del sistema y la respuesta ante un posible error sea menos ágil, obligándonos a mirar y rebuscar logs en varios elementos. 
 Siempre hay que pensar en la mejor herramienta a nuestro problema.
 
 Las tecnologías **Devops** y en particular **Docker y Kubernetes** me parece un mundo asombroso y es por ello que me he tomado este tiempo en hacer este ejercicio y poder contarlo.
