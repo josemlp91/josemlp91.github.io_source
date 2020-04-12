@@ -155,8 +155,8 @@ kubectl create -f josemlp91-myblog.yml
 Y veo que funciona. Subidon de adrenalina. 🎈 🎊 🎉
 
 En este punto ya no me puedo quedar aquí después de darle algunas vueltas,
-decido empezar a buscar un cluster **K8S** en la nueve, donde hacer mi experimento, 
-lo primero que se me ocurre es tirar de Amazon, Google Cloud o Azure. ☁️ Además alguno de ellos ofrece crédito de forma gratuita para hacer pruebas. Pero creo que hay que darle un puntito más de emoción de la cosa, y tratar de instalar un cluster kubernetes, puede ser un buen reto. 💪 (estoy confinado en casa y tengo tengo todo el puente...).
+decido empezar a buscar un cluster **K8S** en la nube, donde hacer mi experimento, 
+lo primero que se me ocurre es tirar de Amazon, Google Cloud o Azure. ☁️ Además alguno de ellos ofrece crédito de forma gratuita para hacer pruebas. Pero creo que hay que darle un puntito de emoción a la cosa, y tratar de instalar un cluster kubernetes, puede ser un buen reto. 💪 (estoy confinado en casa y tengo tengo todo el puente...).
 
 Comienzo a comparar diferentes proveedores de **Servidores Cloud VPS**, y consigo encontrar uno que me convence en relación calidad precio. Teniendo en cuenta que necesito tener dos, como mínimo (nodo máster y un worker), y que el master debe tener **2GB de RAM y 2 cores**. 
 
@@ -167,10 +167,10 @@ Y este seria el resultado.
 
 ![](/images/nodes.png)
 
-Y ya puedo repetir lo mismo que hacia en minikube, pero esta vez con un cluste de producción.
+Y ya puedo repetir lo mismo que hacia en minikube, pero esta vez con un cluster de producción.
 
 Para que sea completamente operativo, es esencial crear un ingress, en mi caso me decanto por la implementación
-con Nginx, aunque existe muchas otras opciones, entre ellas Traefik y HAProxy. 
+con Nginx, aunque existen muchas otras opciones, entre ellas Traefik y HAProxy. 
 
 En este punto también conozco la herramienta **Helm**, con la cual implementar el ingress es un poco más simple.
 
