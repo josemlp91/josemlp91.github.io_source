@@ -1,3 +1,5 @@
+FROM alpine:3.10.2
+
 ENV BASE_URL="https://get.helm.sh"
 
 ENV HELM_2_FILE="helm-v2.16.1-linux-amd64.tar.gz"
