@@ -19,7 +19,7 @@ jobs:
         repository: ${{ secrets.DOCKER_REPOSITORY }}
         tags: ${{ github.sha }}
     - name: Helm deploy to k8s cluster
-      uses: 'deliverybot/helm@v1'
+      uses: './.github/actions/helm-delivery'
       with:
         helm: helm3
         release: 'sparta-web'
