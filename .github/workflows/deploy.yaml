@@ -19,7 +19,8 @@ jobs:
         repository: ${{ secrets.DOCKER_REPOSITORY }}
         tags: ${{ github.sha }}
     - name: Helm deploy to k8s cluster
-      uses: './.github/actions/helm-delivery'
+      # uses: 'deliverybot/helm@v1'  #TODO: Replace after fix https://github.com/deliverybot/helm/issues/49
+      uses: elseu/sdu-helm-deploy-action@0.0.5
       with:
         helm: helm3
         release: 'sparta-web'
