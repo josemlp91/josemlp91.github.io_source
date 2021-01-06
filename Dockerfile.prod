@@ -7,8 +7,7 @@ RUN bundle install
 COPY ./jekyll /app/jekyll/
 RUN mkdir -p /app/jekyll/_site && jekyll build
 
-FROM nginx:alpine
+FROM bitnami/nginx
 
-RUN rm -f /etc/nginx/conf.d/* && rm -rf /app/*
 COPY --from=builder /app/jekyll/_site /app
-COPY ./nginx/default.conf /etc/nginx/conf.d/
+CMD ["nginx", "-g", "daemon off;"]

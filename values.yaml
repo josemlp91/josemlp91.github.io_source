@@ -1,0 +1,25 @@
+# Install
+# ---
+# k create namespace landing
+# helm install myblog bitnami/nginx -f values.yaml -n landing
+
+replicaCount: 1
+
+# Image config
+image:
+  imagePullPolicy: Always
+  repository: josemlp91/myblog
+  tag: 0974682f54057749e3623ca3b3aeec3d6b88d349 
+
+# Ingress details
+ingress: 
+  enabled: true
+  hostname: josemiguelopez.es
+
+# Prometheus metrics details
+metrics: 
+  enabled: false
+
+# Service Configuration
+service: 
+  type: ClusterIP

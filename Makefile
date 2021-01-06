@@ -26,7 +26,7 @@ build-dev: ## Build development docker images.
 	docker-compose build
 
 
-build-pro: ## Build production docker images.
+build: ## Build production docker images.
 	@echo "Building production docker images"
 	docker-compose -f docker-compose-prod.yml build
 
@@ -42,10 +42,9 @@ create-post: ## Create new post, usage exmple: make create-post name=TITLE)
 	sudo chown -R $(runner):$(runner) -Rf *
 
 
-publish:  ## Publish image in Docker Hub.
+push: build ## Publish image in Docker Hub.
 	docker login
 	docker build -f Dockerfile.prod -t $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) .
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
 	docker tag $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver) $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):latest
-	kubectl set image deployment/$(K8S_DEPLOYMENT_NAME) $(K8S_DEPLOYMENT_NAME)=$(DOCKER_USERNAME)/$(DOCKER_IMAGE_NAME):$(gitver)
