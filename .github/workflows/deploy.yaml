@@ -22,7 +22,6 @@ jobs:
       # uses: 'deliverybot/helm@v1'  #TODO: Replace after fix https://github.com/deliverybot/helm/issues/49
       uses: elseu/sdu-helm-deploy-action@0.0.5
       with:
-        helm: helm3
         release: 'myblog'
         namespace: 'landing'
         repository: "https://charts.bitnami.com/bitnami"
