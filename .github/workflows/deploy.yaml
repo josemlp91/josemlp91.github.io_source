@@ -31,4 +31,4 @@ jobs:
           image:
             tag: ${{ github.sha }}
       env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+        KUBECONFIG_BASE64: '${{ secrets.KUBECONFIG }}'
