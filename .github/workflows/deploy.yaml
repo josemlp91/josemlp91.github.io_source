@@ -16,12 +16,12 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_REPOSITORY }}
-        tags: josemlp91/myblog:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:${{ github.sha }},${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY }}:latest
     - name: Helm deploy to k8s cluster
       # uses: 'deliverybot/helm@v1'  #TODO: Replace after fix https://github.com/deliverybot/helm/issues/49
       uses: elseu/sdu-helm-deploy-action@0.0.5
       with:
+        helm: helm3 
         release: 'myblog'
         namespace: 'landing'
         repository: "https://charts.bitnami.com/bitnami"
